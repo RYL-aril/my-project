@@ -1,24 +1,41 @@
 @import "tailwindcss";
 
 @theme {
+    /* Colors - Vintage Paper Theme */
     --color-background: #f6f2ea;
     --color-surface: #fbf8f3;
+    --color-parchment-light: #f4ecd8;
+    --color-parchment-base: #e8dcc5;
     --color-ink: #2c2622;
     --color-muted: #8b7d73;
     --color-accent: #6f4e37;
-
+    --color-coffee: #4a3728;
+    --color-sepia-edge: #d2b48c;
+    
+    /* Spacing Scale */
+    --space-1: 0.25rem;
     --space-2: 0.5rem;
     --space-3: 0.75rem;
     --space-4: 1rem;
     --space-6: 1.5rem;
-
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    
+    /* Border Radius */
     --radius-default: 0.5rem;
     --radius-lg: 0.75rem;
-
+    --radius-xl: 1rem;
+    
+    /* Shadows & Elevation */
     --elevation-1: 0 1px 6px rgba(44, 38, 34, 0.06);
     --elevation-2: 0 6px 18px rgba(44, 38, 34, 0.08);
-
+    --shadow-hard: 4px 4px 0px rgba(44, 36, 32, 1);
+    --shadow-hard-sm: 2px 2px 0px rgba(44, 36, 32, 1);
+    
+    /* Typography */
     --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+    --font-mono: "Courier New", "Courier", monospace;
 }
 
 @layer base {
@@ -47,6 +64,7 @@
 }
 
 @layer components {
+    /* Paper Card Component */
     .paper-card {
         background-color: var(--color-surface);
         border-radius: var(--radius-default);
@@ -54,6 +72,7 @@
         padding: var(--space-6);
     }
 
+    /* Form Input with Vintage Style */
     .form-input {
         display: block;
         width: 100%;
@@ -62,6 +81,11 @@
         border: 1px solid rgba(0, 0, 0, 0.06);
         background: transparent;
         color: var(--color-ink);
+        transition: all 0.2s ease-out;
+    }
+
+    .form-input:hover {
+        background: rgba(255, 255, 255, 0.5);
     }
 
     .form-input:focus {
@@ -70,6 +94,7 @@
         border-color: var(--color-accent);
     }
 
+    /* Primary Button - Hard Shadow Style */
     .btn-primary {
         display: inline-flex;
         align-items: center;
@@ -80,8 +105,21 @@
         background-color: var(--color-accent);
         color: #fff;
         font-weight: 600;
+        transition: all 0.15s ease-out;
+        box-shadow: var(--shadow-hard-sm);
     }
 
+    .btn-primary:hover {
+        transform: translateY(2px);
+        box-shadow: 2px 2px 0px rgba(44, 36, 32, 1);
+    }
+
+    .btn-primary:active {
+        transform: translateY(4px);
+        box-shadow: none;
+    }
+
+    /* Ghost Button */
     .btn-ghost {
         display: inline-flex;
         align-items: center;
@@ -91,21 +129,41 @@
         background: transparent;
         color: var(--color-ink);
         border: 1px solid transparent;
+        transition: all 0.2s ease-out;
     }
 
+    .btn-ghost:hover {
+        background: rgba(0, 0, 0, 0.03);
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Text Utilities */
     .text-muted {
         color: var(--color-muted);
     }
+    
     .text-ink {
         color: var(--color-ink);
     }
+    
     .bg-surface {
         background-color: var(--color-surface);
+    }
 
-        --color-background: #f6f2ea;
-    --color-surface: #fbf8f3;
-    --color-ink: #2c2622;
-    --color-muted: #8b7d73;
-    --color-accent: #6f4e37;
+    /* Loading Skeleton Animation */
+    @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+    }
+
+    .skeleton {
+        background: linear-gradient(
+            90deg,
+            var(--color-sepia-edge) 0%,
+            var(--color-surface) 50%,
+            var(--color-sepia-edge) 100%
+        );
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite;
     }
 }
